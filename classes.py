@@ -5,11 +5,12 @@ import matplotlib.pyplot as plt
 
 class TableTennis:
 
-    def __init__(self, version, mass, radius):
+    def __init__(self, version, mass, radius, spin):
         
         self.version = version
         self.mass = mass
         self.radius = radius
+        self.spin = spin  # Clockwise angular velocity (e.g. positive value corresponds to topspin)
         
 
         self.Cd = 0.1  # Drag coefficient numbers?
@@ -19,13 +20,17 @@ class TableTennis:
         self.air_density = 1
         
         self.xspeed = 1  # initial x speed
-        self.yspeed = 0  # initial y speed
+        self.yspeed = 1  # initial y speed
 
 
 
-    def magnus(self, v):
-        M = 50
-        return M
+    def magnus(self, v):  # Assume angular velocity is constant for now
+        Cl = 0.1
+        rho = self.air_density
+        A = pi * self.radius ** 2
+        w = self.spin
+        
+        return 0.5 * Cl * A * rho * v ** 2 * -1  #figure out how to get direction involved
 
     def weight(self):
         m = self.mass
@@ -54,7 +59,7 @@ class TableTennis:
         W = self.weight()
         m = self.mass
 
-        a = (M + W) / m
+        a = -(M - W) / m
 
         return a
 

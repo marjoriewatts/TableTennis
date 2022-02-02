@@ -8,7 +8,7 @@ from classes import TableTennis
 
 
 def main():
-    new = TableTennis("1", 0.0027, 0.04)  # New ball
+    new = TableTennis("1", 0.0027, 0.04, 4)  # New ball
 
     
     # solving the ODE to find velocity
