@@ -8,16 +8,13 @@ from classes import TableTennis
 
 
 def main():
-    new = TableTennis("1", 0.0027, 0.04, 4)  # New ball
+    new = TableTennis("NEW", 0.0027, 0.04, 4, 30)  # New ball
 
-    
     # solving the ODE to find velocity
     t = np.linspace(0, 10, 1000)
 
-
     vx_new = odeint(new.x_acceleration, new.xspeed, t)
     vy_new = odeint(new.y_acceleration, new.yspeed, t)
-
 
     plt.subplot(1, 2, 1)
     plt.title(f'Velocity of {new.version} in x')
