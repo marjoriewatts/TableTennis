@@ -1,6 +1,4 @@
 from math import cos, sin, pi
-import numpy as np
-import matplotlib.pyplot as plt
 
 
 class TableTennis:
@@ -27,7 +25,7 @@ class TableTennis:
         rho = self.air_density
         A = pi * self.radius ** 2
 
-        return 0.5 * Cl * A * rho * v ** 2 * -1  # figure out how to get direction involved
+        return 0.5 * Cl * A * rho * v ** 2  # figure out how to get direction involved
 
     def weight(self):
         m = self.mass
@@ -42,9 +40,11 @@ class TableTennis:
 
     def x_acceleration(self, v, t):
         D = self.drag(v)
+        M = self.magnus(v)
         m = self.mass
+        theta = self.direction
 
-        a = - D / m
+        a = ((M * cos(theta)) - D) / m
 
         return a
 
@@ -52,7 +52,8 @@ class TableTennis:
         M = self.magnus(v)
         W = self.weight()
         m = self.mass
+        theta = self.direction
 
-        a = -(M - W) / m
+        a = ((M * -sin(theta)) + W) / m
 
         return a
