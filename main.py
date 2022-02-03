@@ -63,32 +63,36 @@ def main():
     y0 = [0, 0]
 
     x_new = odeint(new_pos.x_acceleration, x0, ts)
-    xs = x_new[:, 0]
-
+    xs_new = x_new[:, 0]
     y_new = odeint(new_pos.y_acceleration, y0, ts)
-    ys = y_new[:, 0]
+    ys_new = y_new[:, 0]
+
+    x_old = odeint(old_pos.x_acceleration, x0, ts)
+    xs_old = x_new[:, 0]
+    y_old = odeint(old_pos.y_acceleration, y0, ts)
+    ys_old = y_new[:, 0]
 
     plt.subplot(2, 2, 1)
     plt.title(f'Position of {new_pos.version} version in x direction')
-    plt.plot(ts, xs, 'r')
+    plt.plot(ts, xs_new, 'r')
     plt.ylabel('x position')
     plt.xlabel('time')
 
     plt.subplot(2, 2, 2)
     plt.title(f'Position of {new_pos.version} version in x direction')
-    plt.plot(ts, ys, 'r')
+    plt.plot(ts, ys_new, 'r')
     plt.ylabel('y position')
     plt.xlabel('time')
 
     plt.subplot(2, 2, 3)
-    plt.title(f'Position of {new_pos.version} version in x direction')
-    plt.plot(ts, xs, 'r')
+    plt.title(f'Position of {old_pos.version} version in x direction')
+    plt.plot(ts, xs_old, 'r')
     plt.ylabel('x position')
     plt.xlabel('time')
 
     plt.subplot(2, 2, 4)
-    plt.title(f'Position of {new_pos.version} version in x direction')
-    plt.plot(ts, ys, 'r')
+    plt.title(f'Position of {old_pos.version} version in x direction')
+    plt.plot(ts, ys_old, 'r')
     plt.ylabel('y position')
     plt.xlabel('time')
 
