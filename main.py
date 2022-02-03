@@ -4,49 +4,93 @@ import matplotlib.pyplot as plt
 
 from scipy.integrate import odeint
 
-from classes import TableTennis
+from velocity import TableTennis
+from position import Position
 
 
 def main():
-    new = TableTennis("NEW", 0.0027, 0.04, 4, 30)  # New ball
-    old = TableTennis("OLD", 0.0027, 0.038, 4, 30)  # Old ball
+    new_vel = TableTennis("NEW", 0.0027, 0.04, 4, 0)  # New ball
+    old_vel = TableTennis("OLD", 0.0027, 0.038, 4, 0)  # Old ball
 
-    # solving the ODE to find velocity
+    # solving the ODE to find velocity -----------------------------------------------------------------
     t = np.linspace(0, 10, 1000)
 
-    vx_new = odeint(new.x_acceleration, new.xspeed, t)
-    vy_new = odeint(new.y_acceleration, new.yspeed, t)
+    vx_new = odeint(new_vel.x_acceleration, new_vel.x_speed, t)
+    vy_new = odeint(new_vel.y_acceleration, new_vel.y_speed, t)
 
-    vx_old = odeint(old.x_acceleration, old.xspeed, t)
-    vy_old = odeint(old.y_acceleration, old.yspeed, t)
+    vx_old = odeint(old_vel.x_acceleration, old_vel.x_speed, t)
+    vy_old = odeint(old_vel.y_acceleration, old_vel.y_speed, t)
 
     plt.subplot(2, 2, 1)
-    plt.title(f'Velocity of {new.version} in x')
+    plt.title(f'Velocity of {new_vel.version} version in x direction')
     plt.plot(t, vx_new)
     plt.xlabel('Time $t$ [s]')
     plt.ylabel('Velocity $v$ [mph]')
     plt.grid(True, linestyle='dotted')
 
     plt.subplot(2, 2, 2)
-    plt.title(f'Velocity of {new.version} in y')
+    plt.title(f'Velocity of {new_vel.version} version in y direction')
     plt.plot(t, vy_new)
     plt.xlabel('Time $t$ [s]')
     plt.ylabel('Velocity $v$ [mph]')
     plt.grid(True, linestyle='dotted')
 
     plt.subplot(2, 2, 3)
-    plt.title(f'Velocity of {old.version} in x')
+    plt.title(f'Velocity of {old_vel.version} version in x direction')
     plt.plot(t, vx_old)
     plt.xlabel('Time $t$ [s]')
     plt.ylabel('Velocity $v$ [mph]')
     plt.grid(True, linestyle='dotted')
 
     plt.subplot(2, 2, 4)
-    plt.title(f'Velocity of {old.version} in y')
+    plt.title(f'Velocity of {old_vel.version} version in y direction')
     plt.plot(t, vy_old)
     plt.xlabel('Time $t$ [s]')
     plt.ylabel('Velocity $v$ [mph]')
     plt.grid(True, linestyle='dotted')
+
+    plt.tight_layout()
+
+    plt.show()
+
+    # solving the ODE to find position -----------------------------------------------------------------
+    new_pos = Position("NEW", 0.0027, 0.04, 4, 0)  # New ball
+    old_pos = Position("OLD", 0.0027, 0.038, 4, 0)  # Old ball
+
+    ts = np.linspace(1, 10, 200)
+
+    x0 = [0, 4]
+    y0 = [0, 0]
+
+    x_new = odeint(new_pos.x_acceleration, x0, ts)
+    xs = x_new[:, 0]
+
+    y_new = odeint(new_pos.y_acceleration, y0, ts)
+    ys = y_new[:, 0]
+
+    plt.subplot(2, 2, 1)
+    plt.title(f'Position of {new_pos.version} version in x direction')
+    plt.plot(ts, xs, 'r')
+    plt.ylabel('x position')
+    plt.xlabel('time')
+
+    plt.subplot(2, 2, 2)
+    plt.title(f'Position of {new_pos.version} version in x direction')
+    plt.plot(ts, ys, 'r')
+    plt.ylabel('y position')
+    plt.xlabel('time')
+
+    plt.subplot(2, 2, 3)
+    plt.title(f'Position of {new_pos.version} version in x direction')
+    plt.plot(ts, xs, 'r')
+    plt.ylabel('x position')
+    plt.xlabel('time')
+
+    plt.subplot(2, 2, 4)
+    plt.title(f'Position of {new_pos.version} version in x direction')
+    plt.plot(ts, ys, 'r')
+    plt.ylabel('y position')
+    plt.xlabel('time')
 
     plt.tight_layout()
 
