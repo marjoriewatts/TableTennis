@@ -100,6 +100,24 @@ def main():
 
     plt.show()
 
+    # Plotting x position against y position
+
+    plt.subplot(2, 1, 1)
+    plt.title(f'Position of {new_pos.version} version')
+    plt.plot(xs_new, ys_new, 'r')
+    plt.ylabel('y position')
+    plt.xlabel('x position')
+
+    plt.subplot(2, 1, 2)
+    plt.title(f'Position of {old_pos.version} version')
+    plt.plot(xs_old, ys_old, 'r')
+    plt.ylabel('y position')
+    plt.xlabel('x position')
+
+    plt.tight_layout()
+
+    plt.show()
+
 
 if __name__ == "__main__":
     main()
