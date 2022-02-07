@@ -1,16 +1,14 @@
-from math import pi
+from math import sin, cos, pi
 
 
 class TableTennis:
 
-    def __init__(self, version, mass, radius, x_speed, y_speed):
+    def __init__(self, version, mass, radius):
         self.version = version
         self.mass = mass
         self.radius = radius
-        self.x_speed = x_speed
-        self.y_speed = y_speed
 
-        self.Cd = 0.1  # Drag coefficient numbers?
+        self.Cd = 0.47  # Drag coefficient numbers? Re = 10^5
         self.spin = 3  # assumed constant in the magnus equation
         # Clockwise angular velocity (e.g. positive value corresponds to topspin)
 
@@ -40,7 +38,7 @@ class TableTennis:
         M = self.magnus(ux)
         m = self.mass
 
-        a = (M - D) / m
+        a = (- D) / m
 
         return ux[1], a
 
@@ -50,6 +48,6 @@ class TableTennis:
         D = self.drag(uy)
         m = self.mass
 
-        a = (M + W + D) / m
+        a = (W + D) / m
 
         return uy[1], a

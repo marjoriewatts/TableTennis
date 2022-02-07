@@ -4,13 +4,13 @@ import matplotlib.pyplot as plt
 
 from scipy.integrate import odeint
 
-from position import TableTennis
+from classes import TableTennis
 
 
 def main():
     # Solving the ODE for position and velocity
-    NEW = TableTennis("NEW", 0.0027, 0.04, 4, 0)  # New ball
-    OLD = TableTennis("OLD", 0.0027, 0.038, 4, 0)  # Old ball
+    NEW = TableTennis("NEW", 0.0029, 0.04)  # New ball
+    OLD = TableTennis("OLD", 0.0027, 0.038)  # Old ball
 
     t = np.linspace(1, 10, 200)
 
