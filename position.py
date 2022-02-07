@@ -47,6 +47,7 @@ class Position:
     def y_acceleration(self, uy, t):
         M = self.magnus(uy)
         W = self.weight()
+        D = self.drag(uy)
         m = self.mass
 
         a = (M + W) / m
