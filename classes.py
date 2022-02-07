@@ -1,7 +1,7 @@
-from math import cos, sin, pi
+from math import pi
 
 
-class Position:
+class TableTennis:
 
     def __init__(self, version, mass, radius, x_speed, y_speed):
         self.version = version
@@ -50,6 +50,6 @@ class Position:
         D = self.drag(uy)
         m = self.mass
 
-        a = (M + W) / m
+        a = (M + W + D) / m
 
         return uy[1], a
