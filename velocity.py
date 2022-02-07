@@ -14,7 +14,7 @@ class TableTennis:
         self.spin = 3  # assumed constant in the magnus equation
         # Clockwise angular velocity (e.g. positive value corresponds to topspin)
 
-        self.g = -9.81
+        self.g = 9.81
         self.air_density = 1
 
     def magnus(self, v):  # Assume angular velocity is constant for now
@@ -47,8 +47,9 @@ class TableTennis:
     def y_acceleration(self, yv, t):
         M = self.magnus(yv)
         W = self.weight()
+        D = self.drag(yv)
         m = self.mass
 
-        a = (M + W) / m
+        a = -(-M + W + D) / m
 
         return a
