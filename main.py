@@ -4,7 +4,7 @@ import matplotlib.pyplot as plt
 
 from scipy.integrate import odeint
 
-from system import TableTennis
+from classes import TableTennis
 
 
 def main():
