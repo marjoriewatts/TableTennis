@@ -14,7 +14,7 @@ def main():
 
     t = np.linspace(1, 10, 200)
 
-    initial_state = [0, 0, 4, 0]
+    initial_state = [0, 0, 25, 0]
 
     new_sols = odeint(NEW.system, initial_state, t)
     xs_new = new_sols[:, 0]

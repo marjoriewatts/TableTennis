@@ -8,15 +8,18 @@ class TableTennis:
         self.mass = mass
         self.radius = radius
 
-        self.Cd = 0.47  # Drag coefficient numbers? Re = 10^5
-        self.spin = 3  # assumed constant in the magnus equation
+        self.Cd = 0.4  # Drag coefficient / Re = 10^4.832
+        self.K = 1.4 * 10 ** -3  # Lift coefficient for Magnus force
+        self.spin = 300  # assumed constant in the magnus equation
         # Clockwise angular velocity (e.g. positive value corresponds to topspin)
 
         self.g = -9.81
         self.air_density = 1
 
     def magnus(self, v):  # Assume angular velocity is constant for now
-        Cl = 0.01357
+        K = self.K
+        omega = self.spin
+        Cl = K * omega
         rho = self.air_density
         A = pi * self.radius ** 2
 
@@ -45,7 +48,10 @@ class TableTennis:
         m = self.mass
         theta = atan(vy/vx)
 
-        ax = ((Mx * -sin(theta)) - Dx) / m
-        ay = ((My * cos(theta)) + W + Dy) / m
+        # ax = (- Dx) / m
+        # ay = (W + Dy) / m
+
+        ax = ((Mx * sin(theta)) - Dx) / m
+        ay = ((My * -cos(theta)) + W + Dy) / m
 
         return [vx, vy, ax, ay]
